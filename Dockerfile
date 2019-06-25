@@ -1,4 +1,4 @@
-FROM nesneros/runner:latest
+FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y curl gnupg2 python software-properties-common unzip wget zip && rm -rf /var/lib/apt/lists/*
 
