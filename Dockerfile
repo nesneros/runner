@@ -10,13 +10,11 @@ RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | a
 
 ENV GCLOUD_VERSION=251.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
-    GRADLE_USER_HOME=/gradle_user_home
+    DOCKERVERSION=18.03.6-ce
 
-RUN mkdir -p "$GRADLE_USER_HOME" \
+RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
+  && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 -C /usr/local/bin docker/docker \
+  && chmod +x /usr/local/bin docker/docker \
+  && rm docker-${DOCKERVERSION}.tgz \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
   && /google-cloud-sdk/install.sh --additional-components kubectl
-
-COPY /gradles/ /gradles/
-
-RUN sh /gradles/5.4.1/gradlew --help > /dev/null
-RUN sh /gradles/5.4/gradlew --help > /dev/null
