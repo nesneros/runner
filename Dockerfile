@@ -10,8 +10,10 @@ RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | a
 
 ENV GCLOUD_VERSION=251.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin
+    GRADLE_USER_HOME=/gradle_user_home
 
-RUN curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
+RUN mkdir -p "$GRADLE_USER_HOME" \
+  && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
   && /google-cloud-sdk/install.sh --additional-components kubectl
 
 COPY /gradles/ /gradles/
