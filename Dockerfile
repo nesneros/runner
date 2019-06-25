@@ -9,7 +9,7 @@ RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | a
     && rm -rf /var/lib/apt/lists/*
 
 ENV GCLOUD_VERSION=251.0.0 \
-    PATH=$PATH:/google-cloud-sdk/bin
+    PATH=$PATH:/google-cloud-sdk/bin \
     GRADLE_USER_HOME=/gradle_user_home
 
 RUN mkdir -p "$GRADLE_USER_HOME" \
