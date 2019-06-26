@@ -5,7 +5,7 @@ ENV GCLOUD_VERSION=251.0.0 \
     DOCKER_VERSION=18.06.3-ce
 
 RUN apt-get update \
-  && apt-get install -y curl gnupg2 jq python software-properties-common unzip wget zip \
+  && apt-get install -y curl gnupg2 jq python python-openssl software-properties-common unzip wget zip \
   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
