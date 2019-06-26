@@ -9,11 +9,11 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
-  && tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin docker/docker \
-  && chmod +x /usr/local/bin docker/docker \
+  && tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin/ docker/docker \
   && rm docker-${DOCKER_VERSION}.tgz \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
-  && /google-cloud-sdk/install.sh --additional-components kubectl
+  && /google-cloud-sdk/install.sh --additional-components kubectl \
+  && docker --version
 
 RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - \
     && add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
