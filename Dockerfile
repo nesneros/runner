@@ -2,11 +2,16 @@ FROM ubuntu:18.04
 
 ENV GCLOUD_VERSION=251.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
-    DOCKER_VERSION=18.06.3-ce
+    DOCKER_VERSION=18.06.3-ce \
+    NVM_VERSION=v0.34.0 \
+    NVM_DIR=/nvm \
+    JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
+    JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl gnupg2 jq python python-openssl software-properties-common unzip wget zip \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
   && tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin/ docker/docker \
@@ -20,5 +25,3 @@ RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | a
     && apt-get update \
     && apt-get install -y adoptopenjdk-11-hotspot \
     && rm -rf /var/lib/apt/lists/*
-
-ENV JAVA11_HOME=$JAVA_HOME
