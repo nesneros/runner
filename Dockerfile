@@ -11,8 +11,9 @@ ENV GCLOUD_VERSION=257.0.0 \
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
   && rm -rf /var/lib/apt/lists/* \
-  && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash \
-  && cp nvm.sh /usr/local/bin/
+  && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
+
+COPY nvm.sh /usr/local/bin/
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
   && tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin/ docker/docker \
