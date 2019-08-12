@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 ENV GCLOUD_VERSION=257.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
-    DOCKER_VERSION=19.03.1-ce \
+    DOCKER_VERSION=19.03.1 \
     NVM_VERSION=v0.34.0 \
     NVM_DIR=/nvm \
     JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
