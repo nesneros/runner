@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 ENV GCLOUD_VERSION=257.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
     DOCKER_VERSION=19.03.1 \
+    HELM_VERSION=2.14.3
     NVM_VERSION=v0.34.0 \
     NVM_DIR=/nvm \
     JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
@@ -14,6 +15,10 @@ RUN apt-get update \
   && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
 
 COPY nvm.sh /usr/local/bin/
+
+RUN curl -fsSLO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  && tar xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz --strip 1 -C /usr/local/bin linux-amd64/helm
+  && rm helm-v2.14.3-linux-amd64.tar.gz
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
   && tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C /usr/local/bin/ docker/docker \
