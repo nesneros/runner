@@ -1,15 +1,15 @@
 FROM ubuntu:18.04
 
-ENV GCLOUD_VERSION=251.0.0 \
+ENV GCLOUD_VERSION=257.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
-    DOCKER_VERSION=18.06.3-ce \
+    DOCKER_VERSION=19.03.1-ce \
     NVM_VERSION=v0.34.0 \
     NVM_DIR=/nvm \
     JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
     JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 
 RUN apt-get update \
-  && apt-get install -y curl gnupg2 jq python python-openssl software-properties-common unzip wget zip \
+  && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash \
   && copy nvm.sh /usr/local/bin/
