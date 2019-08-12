@@ -17,7 +17,7 @@ RUN apt-get update \
 COPY nvm.sh /usr/local/bin/
 
 RUN curl -fsSLO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
-  && tar xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz --strip 1 -C /usr/local/bin linux-amd64/helm
+  && tar xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz --strip 1 -C /usr/local/bin linux-amd64/helm \
   && rm helm-v2.14.3-linux-amd64.tar.gz
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
