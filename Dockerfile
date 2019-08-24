@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV GCLOUD_VERSION=258.0.0 \
+ENV GCLOUD_VERSION=259.0.0 \
     PATH=$PATH:/google-cloud-sdk/bin \
     DOCKER_VERSION=19.03.1 \
     HELM_VERSION=2.14.3 \
@@ -37,7 +37,7 @@ RUN echo "----- Install Docker client" \
   # && helm version \
   && echo "----- Install gcloud (with kubectl)" \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
-  && /google-cloud-sdk/install.sh --additional-components kubectl \
+  && /google-cloud-sdk/install.sh --additional-components kubectl gsutil \
   && gcloud version
 
 COPY nvm.sh /usr/local/bin/
