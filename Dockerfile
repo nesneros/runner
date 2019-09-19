@@ -1,14 +1,14 @@
 FROM ubuntu:18.04
 
-ENV GCLOUD_VERSION=259.0.0 \
-    PATH=$PATH:/google-cloud-sdk/bin \
-    DOCKER_VERSION=19.03.1 \
-    HELM_VERSION=2.14.3 \
-    KUSTOMIZE_VERSION=3.1.0 \
-    NVM_VERSION=v0.34.0 \
-    NVM_DIR=/nvm \
-    JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
-    JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+ENV GCLOUD_VERSION=263.0.0 \
+  PATH=$PATH:/google-cloud-sdk/bin \
+  DOCKER_VERSION=19.03.2 \
+  HELM_VERSION=2.14.3 \
+  KUSTOMIZE_VERSION=3.2.0 \
+  NVM_VERSION=v0.34.0 \
+  NVM_DIR=/nvm \
+  JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
+  JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
@@ -38,6 +38,11 @@ RUN echo "----- Install Docker client" \
   && echo "----- Install gcloud (with kubectl)" \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
   && /google-cloud-sdk/install.sh --additional-components kubectl gsutil \
-  && gcloud version
+  && gcloud version \
+  && echo "----- Install Jsonnet" \
+  && curl -fsSLO https://github.com/google/jsonnet/releases/download/v0.14.0/jsonnet-bin-v0.14.0-linux.tar.gz \
+  && tar xzvf jsonnet-bin-v0.14.0-linux.tar.gz -C /usr/local/bin/ jsonnet \
+  && rm jsonnet-bin-v0.14.0-linux.tar.gz \
+  && jsonnet -v
 
 COPY nvm.sh /usr/local/bin/
