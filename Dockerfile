@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 ENV GCLOUD_VERSION=263.0.0 \
   JSONNET_VERSION=0.14.0 \
+  KUBECFG_VERSION=0.13.0 \
   PATH=$PATH:/google-cloud-sdk/bin \
   DOCKER_VERSION=19.03.2 \
   HELM_VERSION=2.14.3 \
@@ -45,5 +46,10 @@ RUN echo "----- Install Docker client" \
   && tar xzvf jsonnet-bin-v${JSONNET_VERSION}-linux.tar.gz -C /usr/local/bin/ jsonnet \
   && rm jsonnet-bin-v${JSONNET_VERSION}-linux.tar.gz \
   && jsonnet -v
+
+RUN curl -fsSLo /usr/local/bin/kubecfg https://github.com/bitnami/kubecfg/releases/download/v${KUBECFG_VERSION}/kubecfg-linux-amd64 \
+  && chmod +x /usr/local/bin/kubecfg \
+  && kubecfg version
+  
 
 COPY nvm.sh /usr/local/bin/
