@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
 
-ENV GCLOUD_VERSION=277.0.0 \
+ENV GCLOUD_VERSION=278.0.0 \
   KUBECTL_VERSION=1.16.5 \
   JSONNET_VERSION=0.14.0 \
   KUBECFG_VERSION=0.14.0 \
   PATH=$PATH:/google-cloud-sdk/bin \
   DOCKER_VERSION=19.03.2 \
-  HELM_VERSION=2.15.1 \
+  HELM_VERSION=3.0.3 \
   KUSTOMIZE_VERSION=3.2.0 \
   NVM_VERSION=v0.34.0 \
   NVM_DIR=/nvm \
@@ -37,7 +37,7 @@ RUN echo "----- Install Docker client" \
   && curl -fsSLO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
   && tar xzvf helm-v${HELM_VERSION}-linux-amd64.tar.gz --strip 1 -C /usr/local/bin linux-amd64/helm \
   && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz \
-  # && helm version \
+  && helm version \
   && echo "----- Install gcloud - with gsutil" \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
   && /google-cloud-sdk/install.sh --additional-components gsutil \
