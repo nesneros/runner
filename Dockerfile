@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
-ENV GCLOUD_VERSION=278.0.0 \
-  KUBECTL_VERSION=1.16.5 \
-  JSONNET_VERSION=0.14.0 \
+ENV GCLOUD_VERSION=287.0.0 \
+  # KUBECTL_VERSION=1.16.5 \
+  JSONNET_VERSION=0.15.0 \
   KUBECFG_VERSION=0.14.0 \
   PATH=$PATH:/google-cloud-sdk/bin \
   DOCKER_VERSION=19.03.2 \
@@ -42,7 +42,7 @@ RUN echo "----- Install Docker client" \
   && helm version \
   && echo "----- Install gcloud - with gsutil" \
   && curl -SsL https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz -o - | tar -zxf - \
-  && /google-cloud-sdk/install.sh --additional-components gsutil \
+  && /google-cloud-sdk/install.sh --additional-components gsutil kubectl \
   && gcloud version \
   && echo "----- Install Jsonnet" \
   && curl -fsSLO https://github.com/google/jsonnet/releases/download/v${JSONNET_VERSION}/jsonnet-bin-v${JSONNET_VERSION}-linux.tar.gz \
@@ -53,8 +53,8 @@ RUN echo "----- Install Docker client" \
   && chmod +x /usr/local/bin/kubecfg \
   && kubecfg version
   
-RUN curl -fsSL0o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
-  && chmod +x /usr/local/bin/kubectl \
-  && kubectl version --client=true
+# RUN curl -fsSL0o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+#   && chmod +x /usr/local/bin/kubectl \
+#   && kubectl version --client=true
 
 COPY nvm.sh /usr/local/bin/
