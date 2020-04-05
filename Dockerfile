@@ -10,8 +10,9 @@ ENV GCLOUD_VERSION=278.0.0 \
   KUSTOMIZE_VERSION=3.2.0 \
   NVM_VERSION=v0.34.0 \
   NVM_DIR=/nvm \
-  JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
-  JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+  JAVA_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
+  JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
+  JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
@@ -22,6 +23,7 @@ RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | a
   && add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
   && apt-get update \
   && apt-get install -y adoptopenjdk-11-hotspot \
+  && apt-get install -y adoptopenjdk-14-hotspot \
   && rm -rf /var/lib/apt/lists/*
 
 RUN echo "----- Install Docker client" \
