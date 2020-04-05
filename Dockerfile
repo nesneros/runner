@@ -12,7 +12,7 @@ ENV GCLOUD_VERSION=278.0.0 \
   NVM_DIR=/nvm \
   JAVA_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
   JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
-  JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+  JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
