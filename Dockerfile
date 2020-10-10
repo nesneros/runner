@@ -1,5 +1,9 @@
 FROM ubuntu:20.04
 
+# Avoid asking for timezone during apt install
+ENV TZ=Europe/Copenhagen
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 ENV GCLOUD_VERSION=313.0.1 \
   # KUBECTL_VERSION=1.16.5 \
   JSONNET_VERSION=0.16.0 \
