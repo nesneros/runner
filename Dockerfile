@@ -15,9 +15,9 @@ ENV GCLOUD_VERSION=313.0.1 \
   NVM_VERSION=v0.36.0 \
   NVM_DIR=/nvm \
   JAVA_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
-  JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
+  # JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
   JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
-  JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64
+  JAVA15_HOME=/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
@@ -27,7 +27,7 @@ RUN apt-get update \
 RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - \
   && add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
   && apt-get update \
-  && apt-get install -y adoptopenjdk-11-hotspot \
+  # && apt-get install -y adoptopenjdk-11-hotspot \
   && apt-get install -y adoptopenjdk-14-hotspot \
   && apt-get install -y adoptopenjdk-15-hotspot \
   && rm -rf /var/lib/apt/lists/*
