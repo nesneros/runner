@@ -1,17 +1,14 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 # Avoid asking for timezone during apt install
 ENV TZ=Europe/Copenhagen
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ENV GCLOUD_VERSION=313.0.1 \
-  # KUBECTL_VERSION=1.16.5 \
+ENV GCLOUD_VERSION=328.0.0 \
   JSONNET_VERSION=0.16.0 \
   KUBECFG_VERSION=0.16.0 \
   PATH=$PATH:/google-cloud-sdk/bin \
   DOCKER_VERSION=19.03.13 \
-  # HELM_VERSION=3.0.3 \
-  # KUSTOMIZE_VERSION=3.2.0 \
   NVM_VERSION=v0.36.0 \
   NVM_DIR=/nvm \
   JAVA_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
@@ -20,7 +17,7 @@ ENV GCLOUD_VERSION=313.0.1 \
   JAVA15_HOME=/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64
 
 RUN apt-get update \
-  && apt-get install -y curl git gnupg2 jq python python-openssl software-properties-common unzip wget zip \
+  && apt-get install -y curl git gnupg2 jq podman python software-properties-common unzip wget zip \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
 
