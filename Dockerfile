@@ -4,29 +4,29 @@ FROM ubuntu:20.10
 ENV TZ=Europe/Copenhagen
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ENV GCLOUD_VERSION=328.0.0 \
+ENV GCLOUD_VERSION=322.0.0 \
   JSONNET_VERSION=0.16.0 \
   KUBECFG_VERSION=0.16.0 \
   PATH=$PATH:/google-cloud-sdk/bin \
   DOCKER_VERSION=19.03.13 \
-  NVM_VERSION=v0.36.0 \
-  NVM_DIR=/nvm \
+  # NVM_VERSION=v0.36.0 \
+  # NVM_DIR=/nvm \
   JAVA_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
   # JAVA11_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64 \
   JAVA14_HOME=/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64 \
-  JAVA15_HOME=/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64
+  JAVA16_HOME=/usr/lib/jvm/adoptopenjdk-16-hotspot-amd64
 
 RUN apt-get update \
   && apt-get install -y curl git gnupg2 jq podman python software-properties-common unzip wget zip \
-  && rm -rf /var/lib/apt/lists/* \
-  && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
+  && rm -rf /var/lib/apt/lists/*
+  # && mkdir -p $NVM_DIR && curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
 
 RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - \
   && add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
   && apt-get update \
   # && apt-get install -y adoptopenjdk-11-hotspot \
   && apt-get install -y adoptopenjdk-14-hotspot \
-  && apt-get install -y adoptopenjdk-15-hotspot \
+  && apt-get install -y adoptopenjdk-16-hotspot \
   && rm -rf /var/lib/apt/lists/*
 
 RUN echo "----- Install Docker client" \
@@ -61,4 +61,4 @@ RUN echo "----- Install Docker client" \
 #   && chmod +x /usr/local/bin/kubectl \
 #   && kubectl version --client=true
 
-COPY nvm.sh /usr/local/bin/
+# COPY nvm.sh /usr/local/bin/
